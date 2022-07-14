@@ -8,24 +8,18 @@ import (
 	"net/http"
 	"os"
 
+	usr "github.com/korsakjakub/GOingToREST/user"
+
 	"github.com/gorilla/mux"
 	"github.com/streadway/amqp"
 )
 
-// User ...
-type User struct {
-	ID      string `json:"Id"`
-	Name    string `json:"name"`
-	Surname string `json:"surname"`
-	Age     string `json:"age"`
-}
-
-// Users
-var Users []User
+// Users ...
+var Users []usr.User
 
 func add(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
-	var user User
+	var user usr.User
 	err := json.Unmarshal(reqBody, &user)
 
 	if err != nil {
