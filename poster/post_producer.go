@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
+	"reflect"
 
 	usr "github.com/korsakjakub/GOingToREST/user"
 
@@ -14,7 +14,6 @@ import (
 	"github.com/streadway/amqp"
 )
 
-// Users ...
 var Users []usr.User
 
 func add(w http.ResponseWriter, r *http.Request) {
@@ -22,21 +21,19 @@ func add(w http.ResponseWriter, r *http.Request) {
 	var user usr.User
 	err := json.Unmarshal(reqBody, &user)
 
-	if err != nil {
-		panic("400: Bad Request")
+	if err != nil || reflect.DeepEqual(user, usr.User{}) {
+		w.WriteHeader(400)
+		w.Write([]byte("400 Bad Request"))
+		return
 	}
 
 	Users = append(Users, user)
 
 	json.NewEncoder(w).Encode(user)
 
-	fmt.Println("User: ", user)
+	log.Println("User: ", user)
 
-	url := os.Getenv("AMQP_URL")
-	//If it doesnt exist, use the default connection string
-	if url == "" {
-		url = "amqp://guest:guest@localhost:5672"
-	}
+	url := "amqp://guest:guest@localhost:5672"
 	connection, err := amqp.Dial(url)
 
 	if err != nil {
@@ -88,10 +85,10 @@ func add(w http.ResponseWriter, r *http.Request) {
 func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/add", add).Methods("POST")
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(http.ListenAndServe(":6666", router))
 }
 
 func main() {
-	fmt.Println("Listening... d-_-b")
+	fmt.Println("Listening for POSTs... d-_-b")
 	handleRequests()
 }
