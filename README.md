@@ -15,3 +15,7 @@ GOintToREST is a simple 3-app system built for me to learn about communicating b
   * Struct User with some sample fields like id, name, surname, and age.
   
 For debugging/testing purposes, in [`scripts/`](scripts/) there is [`post_curl.sh`](scripts/post_curl.sh) which send random POSTs of correct form
+
+## Requirements
+* Redis (@ port 6379)
+* Rabbitmq (@ port 5672)
