@@ -1,6 +1,6 @@
 # GOingToREST
 
-GOintToREST is a simple 3-app system built for me to learn about communicating between different services.
+GOingToREST is a simple 3-app system built for me to learn about communicating between different services.
 
 * [`poster/post_producer.go`](poster/post_producer.go) 
   * Listens to POST requests @ port 6666
