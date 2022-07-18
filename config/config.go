@@ -5,21 +5,21 @@ import (
 )
 
 type RedisConfig struct {
-	Address string `mapstructure:"address"`
-	Port 	string `mapstructure:"port"`
+	Address  string `mapstructure:"address"`
+	Port     string `mapstructure:"port"`
 	Password string `mapstructure:"password"`
-	db string `mapstructure:"db"`
+	DB       string `mapstructure:"db"`
 }
 
 type RabbitMQConfig struct {
-	Login string `mapstructure:"login"`
+	Login    string `mapstructure:"login"`
 	Password string `mapstructure:"password"`
-	Address string `mapstructure:"address"`
-	Port string `mapstructure:"port"`
+	Address  string `mapstructure:"address"`
+	Port     string `mapstructure:"port"`
 }
 
 type Config struct {
-	Redis RedisConfig `mapstructure:"redis"`
+	Redis    RedisConfig    `mapstructure:"redis"`
 	RabbitMQ RabbitMQConfig `mapstructure:"rabbitmq"`
 }
 
@@ -45,7 +45,6 @@ func LoadConfig(additionalPath []string) (Config, error) {
 	if err != nil {
 		return Config{}, err
 	}
-
 
 	return config, nil
 }
