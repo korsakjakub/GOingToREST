@@ -18,5 +18,26 @@ For debugging/testing purposes, in [`scripts/`](scripts/) there is [`post_curl.s
 (remark: [jq](https://stedolan.github.io/jq/) required)
 
 ## Requirements
-* Redis (@ port 6379)
-* Rabbitmq (@ port 5672)
+* Docker bridge
+```
+$ docker network create <network-name>
+```
+
+* Redis (@ port 6379 & name=redis)
+* Rabbitmq (@ port 5672 & name=rabbitmq)
+
+# Usage
+
+In order to build docker images for apps in [`poster/`](poster/), [`saver/`](saver/), and [`explorer/`](explorer/) run
+
+```sh
+$ # Let <name> = poster, etc.
+$ docker build --rm -t <name> .
+```
+
+To run:
+
+```sh
+$ # poster <ports>=6666:6666, explorer <ports>=8000:8000, saver <ports>=empty
+$ docker run -dit --name <name> --network <network-name> -p <ports> <name>
+```

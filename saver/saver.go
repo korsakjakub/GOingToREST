@@ -13,7 +13,7 @@ import (
 
 var ctx = context.Background()
 var rdb = redis.NewClient(&redis.Options{
-	Addr:     "localhost:6379",
+	Addr:     "redis:6379",
 	Password: "",
 	DB:       0,
 })
@@ -32,7 +32,7 @@ func sendToRedis(msg []byte) error {
 }
 
 func main() {
-	url := "amqp://guest:guest@localhost:5672"
+	url := "amqp://guest:guest@rabbitmq:5672"
 	connection, err := amqp.Dial(url)
 	if err != nil {
 		panic("could not establish connection with RabbitMQ:" + err.Error())
