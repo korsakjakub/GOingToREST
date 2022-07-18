@@ -25,7 +25,7 @@ type Config struct {
 
 var vp *viper.Viper
 
-func LoadConfig() (Config, error) {
+func LoadConfig(additionalPath []string) (Config, error) {
 	vp = viper.New()
 	var config Config
 
@@ -33,6 +33,9 @@ func LoadConfig() (Config, error) {
 	vp.SetConfigType("yaml")
 	vp.AddConfigPath("./config")
 	vp.AddConfigPath(".")
+	for _, path := range additionalPath {
+		vp.AddConfigPath(path)
+	}
 	err := vp.ReadInConfig()
 	if err != nil {
 		return Config{}, err
