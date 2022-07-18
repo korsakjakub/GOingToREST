@@ -8,6 +8,7 @@ import (
 
 	redis "github.com/go-redis/redis/v9"
 	usr "github.com/korsakjakub/GOingToREST/user"
+	config "github.com/korsakjakub/GOingToREST/config"
 	amqp "github.com/streadway/amqp"
 )
 
@@ -32,6 +33,12 @@ func sendToRedis(msg []byte) error {
 }
 
 func main() {
+	config, err := config.LoadConfig()
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println(config)
+
 	url := "amqp://guest:guest@localhost:5672"
 	connection, err := amqp.Dial(url)
 	if err != nil {

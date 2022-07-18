@@ -12,9 +12,23 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/streadway/amqp"
+	"github.com/spf13/viper"
 )
 
 var Users []usr.User
+
+func main() {
+	vp := viper.New()
+	vp.SetConfigName("poster_config")
+	vp.SetConfigType("yaml")
+	vp.AddConfigPath(".")
+	err := vp.ReadInConfig()
+	if err != nil {
+		panic("Cannot read the config file: " + err.Error())
+	}
+	fmt.Println("Listening for POSTs... d-_-b")
+	handleRequests()
+}
 
 func add(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
@@ -52,14 +66,14 @@ func add(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	b, err := json.Marshal(user)
+	user_data_json, err := json.Marshal(user)
 	if err != nil {
 		panic(err)
 	}
 
 	message := amqp.Publishing{
 		ContentType: "application/json",
-		Body:        b,
+		Body:        user_data_json,
 	}
 
 	err = channel.Publish("events", "random-key", false, false, message)
@@ -86,9 +100,4 @@ func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/add", add).Methods("POST")
 	log.Fatal(http.ListenAndServe(":6666", router))
-}
-
-func main() {
-	fmt.Println("Listening for POSTs... d-_-b")
-	handleRequests()
 }
