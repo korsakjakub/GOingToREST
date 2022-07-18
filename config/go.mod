@@ -1,4 +1,4 @@
-module github.com/korsakjakub/GOingTOREST/config
+module github.com/korsakjakub/GOingToREST/config
 
 go 1.18
 
