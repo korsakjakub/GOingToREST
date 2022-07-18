@@ -33,7 +33,7 @@ func add(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("User: ", user)
 
-	url := "amqp://guest:guest@localhost:5672"
+	url := "amqp://guest:guest@rabbitmq:5672"
 	connection, err := amqp.Dial(url)
 
 	if err != nil {
