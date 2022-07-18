@@ -23,8 +23,8 @@ For debugging/testing purposes, in [`scripts/`](scripts/) there is [`post_curl.s
 $ docker network create <network-name>
 ```
 
-* Redis (@ port 6379)
-* Rabbitmq (@ port 5672)
+* Redis (@ port 6379 & name=redis)
+* Rabbitmq (@ port 5672 & name=rabbitmq)
 
 # Usage
 
