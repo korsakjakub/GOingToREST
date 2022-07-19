@@ -8,26 +8,41 @@ import (
 	"net/http"
 	"reflect"
 
+	config "github.com/korsakjakub/GOingToREST/config"
 	usr "github.com/korsakjakub/GOingToREST/user"
 
 	"github.com/gorilla/mux"
 	"github.com/streadway/amqp"
-	"github.com/spf13/viper"
 )
 
-var Users []usr.User
+var users []usr.User
+var conf config.Config
 
 func main() {
-	vp := viper.New()
-	vp.SetConfigName("poster_config")
-	vp.SetConfigType("yaml")
-	vp.AddConfigPath(".")
-	err := vp.ReadInConfig()
-	if err != nil {
-		panic("Cannot read the config file: " + err.Error())
-	}
+	conf, _ = config.LoadConfig([]string{"../config"})
 	fmt.Println("Listening for POSTs... d-_-b")
 	handleRequests()
+}
+
+func connectToRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
+	url := fmt.Sprintf("amqp://%s:%s@%s:%s", conf.RabbitMQ.Login, conf.RabbitMQ.Password, conf.RabbitMQ.Address, conf.RabbitMQ.Port)
+	connection, err := amqp.Dial(url)
+
+	if err != nil {
+		panic("could not establish connection with RabbitMQ:" + err.Error())
+		return nil, nil, err
+	}
+	channel, err := connection.Channel()
+	if err != nil {
+		panic("could not open RabbitMQ channel:" + err.Error())
+		return nil, nil, err
+	}
+	err = channel.ExchangeDeclare(conf.RabbitMQ.ExchangeName, conf.RabbitMQ.ExchangeType, true, false, false, false, nil)
+	if err != nil {
+		panic(err)
+		return nil, nil, err
+	}
+	return connection, channel, err
 }
 
 func add(w http.ResponseWriter, r *http.Request) {
@@ -40,64 +55,28 @@ func add(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("400 Bad Request"))
 		return
 	}
-
-	Users = append(Users, user)
-
+	users = append(users, user)
 	json.NewEncoder(w).Encode(user)
-
 	log.Println("User: ", user)
-
-	url := "amqp://guest:guest@rabbitmq:5672"
-	connection, err := amqp.Dial(url)
-
-	if err != nil {
-		panic("could not establish connection with RabbitMQ:" + err.Error())
-	}
-
-	channel, err := connection.Channel()
-
-	if err != nil {
-		panic("could not open RabbitMQ channel:" + err.Error())
-	}
-
-	err = channel.ExchangeDeclare("events", "topic", true, false, false, false, nil)
-
-	if err != nil {
-		panic(err)
-	}
-
 	user_data_json, err := json.Marshal(user)
 	if err != nil {
 		panic(err)
 	}
-
 	message := amqp.Publishing{
 		ContentType: "application/json",
 		Body:        user_data_json,
 	}
-
-	err = channel.Publish("events", "random-key", false, false, message)
+	connection, channel, err := connectToRabbitMQ()
+	err = channel.Publish(conf.RabbitMQ.ExchangeName, "random-key", false, false, message)
 
 	if err != nil {
 		panic("error publishing a message to the queue:" + err.Error())
 	}
-
-	_, err = channel.QueueDeclare("addingUser", true, false, false, false, nil)
-
-	if err != nil {
-		panic("error declaring the queue: " + err.Error())
-	}
-
-	// We bind the queue to the exchange to send and receive data from the queue
-	err = channel.QueueBind("addingUser", "#", "events", false, nil)
-
-	if err != nil {
-		panic("error binding to the queue: " + err.Error())
-	}
+	defer connection.Close()
 }
 
 func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/add", add).Methods("POST")
-	log.Fatal(http.ListenAndServe(":6666", router))
+	router.HandleFunc("/"+conf.Poster.Function, add).Methods("POST")
+	log.Fatal(http.ListenAndServe(":"+conf.Poster.Port, router))
 }

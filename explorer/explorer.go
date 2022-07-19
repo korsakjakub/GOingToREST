@@ -9,14 +9,12 @@ import (
 
 	redis "github.com/go-redis/redis/v9"
 	mux "github.com/gorilla/mux"
+	config "github.com/korsakjakub/GOingToREST/config"
 )
 
 var ctx = context.Background()
-var rdb = redis.NewClient(&redis.Options{
-	Addr:     "redis:6379",
-	Password: "",
-	DB:       0,
-})
+var rdb *redis.Client
+var conf config.Config
 
 func getSize(w http.ResponseWriter, r *http.Request) {
 
@@ -28,8 +26,27 @@ func getSize(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, strconv.FormatInt(val, 10))
 }
 
+func connectRedis() error {
+	DBNumber, err := strconv.Atoi(conf.Redis.DB)
+	if err != nil {
+		panic("Could not load config correctly: " + err.Error())
+		return err
+	}
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%s", conf.Redis.Address, conf.Redis.Port),
+		Password: conf.Redis.Password,
+		DB:       DBNumber,
+	})
+	return nil
+}
+
 func main() {
+	conf, _ = config.LoadConfig([]string{"../config"})
+	err := connectRedis()
+	if err != nil {
+		panic("error connecting to Redis:" + err.Error())
+	}
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/size", getSize).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8000", router))
+	router.HandleFunc("/"+conf.Explorer.Function, getSize).Methods("GET")
+	log.Fatal(http.ListenAndServe(":"+conf.Explorer.Port, router))
 }

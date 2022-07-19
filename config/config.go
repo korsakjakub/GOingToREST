@@ -12,15 +12,30 @@ type RedisConfig struct {
 }
 
 type RabbitMQConfig struct {
-	Login    string `mapstructure:"login"`
-	Password string `mapstructure:"password"`
-	Address  string `mapstructure:"address"`
+	Login        string `mapstructure:"login"`
+	Password     string `mapstructure:"password"`
+	Address      string `mapstructure:"address"`
+	Port         string `mapstructure:"port"`
+	ExchangeName string `mapstructure:"exchangename"`
+	ExchangeType string `mapstructure:"exchangetype"`
+	QueueName    string `mapstructure:"queuename"`
+}
+
+type PosterConfig struct {
 	Port     string `mapstructure:"port"`
+	Function string `mapstructure:"function"`
+}
+
+type ExplorerConfig struct {
+	Port     string `mapstructure:"port"`
+	Function string `mapstructure:"function"`
 }
 
 type Config struct {
 	Redis    RedisConfig    `mapstructure:"redis"`
 	RabbitMQ RabbitMQConfig `mapstructure:"rabbitmq"`
+	Poster   PosterConfig   `mapstructure:"poster"`
+	Explorer ExplorerConfig `mapstructure:"explorer"`
 }
 
 var vp *viper.Viper

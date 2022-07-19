@@ -3,21 +3,20 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	redis "github.com/go-redis/redis/v9"
-	usr "github.com/korsakjakub/GOingToREST/user"
 	config "github.com/korsakjakub/GOingToREST/config"
+	usr "github.com/korsakjakub/GOingToREST/user"
 	amqp "github.com/streadway/amqp"
 )
 
 var ctx = context.Background()
-var rdb = redis.NewClient(&redis.Options{
-	Addr:     "redis:6379",
-	Password: "",
-	DB:       0,
-})
+var rdb *redis.Client
+var conf config.Config
 
 func sendToRedis(msg []byte) error {
 	var user usr.User
@@ -32,35 +31,59 @@ func sendToRedis(msg []byte) error {
 	return nil
 }
 
-func main() {
-	config, err := config.LoadConfig()
+func connectRedis() error {
+	DBNumber, err := strconv.Atoi(conf.Redis.DB)
 	if err != nil {
-		panic(err.Error())
+		panic("Could not load config correctly: " + err.Error())
+		return err
 	}
-	fmt.Println(config)
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%s", conf.Redis.Address, conf.Redis.Port),
+		Password: conf.Redis.Password,
+		DB:       DBNumber,
+	})
+	return nil
+}
 
-	url := "amqp://guest:guest@localhost:5672"
+func connectRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
+	url := fmt.Sprintf("amqp://%s:%s@%s:%s", conf.RabbitMQ.Login, conf.RabbitMQ.Password, conf.RabbitMQ.Address, conf.RabbitMQ.Port)
+
 	connection, err := amqp.Dial(url)
 	if err != nil {
 		panic("could not establish connection with RabbitMQ:" + err.Error())
+		return nil, nil, err
 	}
 	channel, err := connection.Channel()
 	if err != nil {
 		panic("could not open RabbitMQ channel:" + err.Error())
+		return nil, nil, err
 	}
-	err = channel.ExchangeDeclare("events", "topic", true, false, false, false, nil)
+	err = channel.ExchangeDeclare(conf.RabbitMQ.ExchangeName, conf.RabbitMQ.ExchangeType, true, false, false, false, nil)
 	if err != nil {
 		panic(err)
+		return nil, nil, err
 	}
-	_, err = channel.QueueDeclare("test", true, false, false, false, nil)
+	_, err = channel.QueueDeclare(conf.RabbitMQ.QueueName, true, false, false, false, nil)
 	if err != nil {
 		panic("error declaring the queue: " + err.Error())
+		return nil, nil, err
 	}
-	err = channel.QueueBind("test", "#", "events", false, nil)
+	err = channel.QueueBind(conf.RabbitMQ.QueueName, "#", conf.RabbitMQ.ExchangeName, false, nil)
 	if err != nil {
 		panic("error binding to the queue: " + err.Error())
+		return nil, nil, err
 	}
-	msgs, err := channel.Consume("test", "", false, false, false, false, nil)
+	return connection, channel, err
+}
+
+func main() {
+	conf, _ = config.LoadConfig([]string{"../config"})
+	err := connectRedis()
+	if err != nil {
+		panic("error connecting to Redis:" + err.Error())
+	}
+	connection, channel, err := connectRabbitMQ()
+	msgs, err := channel.Consume(conf.RabbitMQ.QueueName, "", false, false, false, false, nil)
 	if err != nil {
 		panic("error consuming the queue: " + err.Error())
 	}

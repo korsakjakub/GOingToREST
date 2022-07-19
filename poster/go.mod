@@ -2,14 +2,21 @@ module github.com/korsakjakub/GOingToREST/poster
 
 go 1.18
 
+// replace github.com/korsakjakub/GOingToREST/config => /media/Developer/GOingToREST/config
+
+// replace github.com/korsakjakub/GOingToREST/user => /media/Developer/GOingToREST/user
+
 require github.com/gorilla/mux v1.8.0
 
-require github.com/streadway/amqp v1.0.0
+require (
+	github.com/korsakjakub/GOingToREST/config v0.0.0-20220718143554-25c3c7f2e62c
+	github.com/korsakjakub/GOingToREST/user v0.0.0-20220714143421-cae789d65914
+	github.com/streadway/amqp v1.0.0
+)
 
 require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/korsakjakub/GOingToREST/user v0.0.0-20220714143421-cae789d65914 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
