@@ -7,23 +7,27 @@ import (
 	"net/http"
 	"strconv"
 
-	redis "github.com/go-redis/redis/v9"
-	mux "github.com/gorilla/mux"
-	config "github.com/korsakjakub/GOingToREST/config"
+	"github.com/go-redis/redis/v9"
+	"github.com/gorilla/mux"
+	"github.com/korsakjakub/GOingToREST/config"
 )
 
 var ctx = context.Background()
 var rdb *redis.Client
 var conf config.Config
 
-func getSize(w http.ResponseWriter, r *http.Request) {
+func getSize(w http.ResponseWriter, _ *http.Request) {
 
 	val, err := rdb.DBSize(ctx).Result()
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Fprintf(w, strconv.FormatInt(val, 10))
+	_, err2 := fmt.Fprintf(w, strconv.FormatInt(val, 10))
+	if err2 != nil {
+		return
+	}
+	log.Println(val)
 }
 
 func connectRedis() error {
@@ -41,7 +45,7 @@ func connectRedis() error {
 }
 
 func main() {
-	conf, _ = config.LoadConfig([]string{"../config"})
+	conf = config.LoadConfig([]string{"../config"})
 	err := connectRedis()
 	if err != nil {
 		panic("error connecting to Redis:" + err.Error())

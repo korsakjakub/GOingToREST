@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"reflect"
 
-	config "github.com/korsakjakub/GOingToREST/config"
+	"github.com/korsakjakub/GOingToREST/config"
 	usr "github.com/korsakjakub/GOingToREST/user"
 
 	"github.com/gorilla/mux"
@@ -19,7 +19,7 @@ var users []usr.User
 var conf config.Config
 
 func main() {
-	conf, _ = config.LoadConfig([]string{"../config"})
+	conf = config.LoadConfig([]string{"../config"})
 	fmt.Println("Listening for POSTs... d-_-b")
 	handleRequests()
 }
