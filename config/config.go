@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/spf13/viper"
+	"log"
 )
 
 type RedisConfig struct {
@@ -40,11 +41,15 @@ type Config struct {
 
 var vp *viper.Viper
 
-func LoadConfig(additionalPath []string) (Config, error) {
+func LoadConfig(additionalPath []string, args ...string) Config {
 	vp = viper.New()
 	var config Config
 
-	vp.SetConfigName("config")
+	if len(args) == 0 {
+		vp.SetConfigName("config")
+	} else {
+		vp.SetConfigName(args[0])
+	}
 	vp.SetConfigType("yaml")
 	vp.AddConfigPath("./config")
 	vp.AddConfigPath(".")
@@ -53,13 +58,15 @@ func LoadConfig(additionalPath []string) (Config, error) {
 	}
 	err := vp.ReadInConfig()
 	if err != nil {
-		return Config{}, err
+		log.Fatal("Cannot read the config file: ", err.Error())
+		return Config{}
 	}
 
 	err = vp.Unmarshal(&config)
 	if err != nil {
-		return Config{}, err
+		log.Fatal("Cannot unmarshal the config file: ", err.Error())
+		return Config{}
 	}
 
-	return config, nil
+	return config
 }
