@@ -24,7 +24,7 @@ func main() {
 	if err != nil {
 		panic("error connecting to Redis:" + err.Error())
 	}
-	connection, channel, err := connectRabbitMQ()
+	connection, channel, err := connectToRabbitMQ()
 	msgs, err := channel.Consume(conf.RabbitMQ.QueueName, "", false, false, false, false, nil)
 	if err != nil {
 		panic("error consuming the queue: " + err.Error())
@@ -67,7 +67,7 @@ func connectRedis() error {
 	return nil
 }
 
-func connectRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
+func connectToRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
 	url := fmt.Sprintf("amqp://%s:%s@%s:%s", conf.RabbitMQ.Login, conf.RabbitMQ.Password, conf.RabbitMQ.Address, conf.RabbitMQ.Port)
 	connection, err := amqp.Dial(url)
 	if err != nil {
