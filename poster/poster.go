@@ -20,14 +20,17 @@ var conf config.Config
 
 func main() {
 	conf = config.LoadConfig([]string{"../config"})
+	connection, channel, err := connectToRabbitMQ()
+	if err != nil {
+		panic(err.Error())
+	}
 	fmt.Println("Listening for POSTs... d-_-b")
-	handleRequests()
+	handleRequests(connection, channel)
 }
 
 func connectToRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
 	url := fmt.Sprintf("amqp://%s:%s@%s:%s", conf.RabbitMQ.Login, conf.RabbitMQ.Password, conf.RabbitMQ.Address, conf.RabbitMQ.Port)
 	connection, err := amqp.Dial(url)
-
 	if err != nil {
 		panic("could not establish connection with RabbitMQ:" + err.Error())
 		return nil, nil, err
@@ -45,7 +48,7 @@ func connectToRabbitMQ() (*amqp.Connection, *amqp.Channel, error) {
 	return connection, channel, err
 }
 
-func add(w http.ResponseWriter, r *http.Request) {
+func add(w http.ResponseWriter, r *http.Request, channel *amqp.Channel) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
 	var user usr.User
 	err := json.Unmarshal(reqBody, &user)
@@ -58,25 +61,26 @@ func add(w http.ResponseWriter, r *http.Request) {
 	users = append(users, user)
 	json.NewEncoder(w).Encode(user)
 	log.Println("User: ", user)
-	user_data_json, err := json.Marshal(user)
+	userDataJson, err := json.Marshal(user)
 	if err != nil {
 		panic(err)
 	}
 	message := amqp.Publishing{
 		ContentType: "application/json",
-		Body:        user_data_json,
+		Body:        userDataJson,
 	}
-	connection, channel, err := connectToRabbitMQ()
 	err = channel.Publish(conf.RabbitMQ.ExchangeName, "random-key", false, false, message)
 
 	if err != nil {
 		panic("error publishing a message to the queue:" + err.Error())
 	}
-	defer connection.Close()
 }
 
-func handleRequests() {
+func handleRequests(connection *amqp.Connection, channel *amqp.Channel) {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/"+conf.Poster.Function, add).Methods("POST")
+	router.HandleFunc("/"+conf.Poster.Function, func(w http.ResponseWriter, r *http.Request) {
+		add(w, r, channel)
+	}).Methods("POST")
+	defer connection.Close()
 	log.Fatal(http.ListenAndServe(":"+conf.Poster.Port, router))
 }
