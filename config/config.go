@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/spf13/viper"
 	"log"
+	"os"
 )
 
 type RedisConfig struct {
@@ -45,17 +46,23 @@ func LoadConfig(additionalPath []string, args ...string) Config {
 	vp = viper.New()
 	var config Config
 
-	if len(args) == 0 {
-		vp.SetConfigName("config")
-	} else {
+	if len(os.Getenv("CONFIG_NAME")) > 0 && len(os.Getenv("CONFIG_TYPE")) > 0 {
+		vp.SetConfigName(os.Getenv("CONFIG_NAME"))
+		vp.SetConfigType(os.Getenv("CONFIG_TYPE"))
+	} else if len(args) > 0 {
 		vp.SetConfigName(args[0])
+		vp.SetConfigType(args[1])
+	} else {
+		vp.SetConfigName("config")
+		vp.SetConfigType("yaml")
 	}
-	vp.SetConfigType("yaml")
+	vp.AddConfigPath("/")
 	vp.AddConfigPath("./config")
 	vp.AddConfigPath(".")
 	for _, path := range additionalPath {
 		vp.AddConfigPath(path)
 	}
+
 	err := vp.ReadInConfig()
 	if err != nil {
 		log.Fatal("Cannot read the config file: ", err.Error())

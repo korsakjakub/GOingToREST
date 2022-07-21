@@ -1,5 +1,5 @@
 redis:
-  address: "localhost"
+  address: "redis"
   port: "6379"
   password: ""
   db: "0"
@@ -7,7 +7,7 @@ redis:
 rabbitmq:
   login: "guest"
   password: "guest"
-  address: "localhost"
+  address: "rabbitmq"
   port: "5672"
   exchangename: "events"
   exchangetype: "topic"

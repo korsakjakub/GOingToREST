@@ -40,7 +40,7 @@ func TestLoadConfig(t *testing.T) {
 		t.Error("Could not marshal User struct")
 	}
 	_ = ioutil.WriteFile("test.json", configJson, 0644)
-	got := LoadConfig([]string{"."}, "test.json")
+	got := LoadConfig([]string{"."}, "test", "json")
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("wanted %s, got %s", want, got)
 	}
