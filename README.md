@@ -2,7 +2,7 @@
 
 GOingToREST is a simple 3-app system built for me to learn about communicating between different services.
 
-* [`poster/post_producer.go`](poster/post_producer.go) 
+* [`poster/poster.go`](poster/poster.go) 
   * Listens to POST requests @ port 6666
   * Redirects data from POSTs to Rabbitmq
 * [`saver/saver.go`](saver/saver.go)
