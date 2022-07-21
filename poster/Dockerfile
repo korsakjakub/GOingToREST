@@ -1,15 +1,14 @@
 FROM golang:1.18 as build
 
-ENV APP poster
-ENV CMD_PATH post_producer.go
+WORKDIR /go/src/app
+COPY . .
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o /go/bin/app
 
-COPY . $GOPATH/src/$APP
-WORKDIR $GOPATH/src/$APP
+FROM gcr.io/distroless/static-debian11
 
-RUN go build -v -o /$APP $GOPATH/src/$APP/$CMD_PATH
+ENV CONFIG_PATH=/
+ENV CONFIG_TYPE="json"
 
-FROM alpine:3.14
-ENV APP poster
-COPY --from=build /$APP_NAME .
-
-CMD ./$APP
+COPY --from=build /go/bin/app /
+CMD ["/app"]

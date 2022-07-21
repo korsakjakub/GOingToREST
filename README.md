@@ -32,12 +32,11 @@ In order to build docker images for apps in [`poster/`](poster/), [`saver/`](sav
 
 ```sh
 $ # Let <name> = poster, etc.
-$ docker build --rm -t <name> .
+$ docker build -t <name> .
 ```
 
 To run:
 
 ```sh
-$ # poster <ports>=6666:6666, explorer <ports>=8000:8000, saver <ports>=empty
-$ docker run -dit --name <name> --network <network-name> -p <ports> <name>
+$ docker run --rm -it --name <name> --network <network-name> -v <path to config file>:/config.yaml -p <ports> <name>
 ```

@@ -3,13 +3,12 @@ module github.com/korsakjakub/GOingToREST/poster
 go 1.18
 
 // replace github.com/korsakjakub/GOingToREST/config => /media/Developer/GOingToREST/config
-
 // replace github.com/korsakjakub/GOingToREST/user => /media/Developer/GOingToREST/user
 
 require github.com/gorilla/mux v1.8.0
 
 require (
-	github.com/korsakjakub/GOingToREST/config v0.0.0-20220720140327-07283d9c8029
+	github.com/korsakjakub/GOingToREST/config v0.0.0-20220721104126-06d56b945888
 	github.com/korsakjakub/GOingToREST/user v0.0.0-20220719055909-90669832da94
 	github.com/streadway/amqp v1.0.0
 )
