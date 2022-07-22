@@ -127,8 +127,8 @@ github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:
 github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1:6v2b51hI/fHJwM22ozAgKL4VKDeJcHhJFhtBdhmNjmU=
 github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
-github.com/korsakjakub/GOingToREST/config v0.0.0-20220720140327-07283d9c8029 h1:wMpPUGT9D5j32ZuzC5N/CZkvQRzDtM7dzAxg80bQzW4=
-github.com/korsakjakub/GOingToREST/config v0.0.0-20220720140327-07283d9c8029/go.mod h1:+5TviBEU1cvKQXJeC8w3FhepvfvwjMDNWp4r7TxNBdI=
+github.com/korsakjakub/GOingToREST/config v0.0.0-20220721104126-06d56b945888 h1:wLhCOML971q2QFGdRYvwa8kn6Dy5cAsSJrPV7Oo+xV8=
+github.com/korsakjakub/GOingToREST/config v0.0.0-20220721104126-06d56b945888/go.mod h1:+5TviBEU1cvKQXJeC8w3FhepvfvwjMDNWp4r7TxNBdI=
 github.com/korsakjakub/GOingToREST/user v0.0.0-20220719055909-90669832da94 h1:5mikA6LFxwGeuRhEt6i0oPFPz6T8o4HlEEh1B4HJxqg=
 github.com/korsakjakub/GOingToREST/user v0.0.0-20220719055909-90669832da94/go.mod h1:j7QDlY3uFZSpho8EuwcvGJUnjRRDKwo+4Kblhz4QtNg=
 github.com/kr/fs v0.1.0/go.mod h1:FFnZGqtBN9Gxj7eW1uZ42v5BccTP0vu6NEaFoC2HwRg=

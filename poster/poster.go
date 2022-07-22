@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"reflect"
 
 	"github.com/korsakjakub/GOingToREST/config"
@@ -19,7 +20,7 @@ var users []usr.User
 var conf config.Config
 
 func main() {
-	conf = config.LoadConfig([]string{"../config"})
+	conf = config.LoadConfig([]string{"../config"}, os.Getenv("CONFIG_NAME"), os.Getenv("CONFIG_TYPE"))
 	connection, channel, err := connectToRabbitMQ()
 	if err != nil {
 		panic(err.Error())

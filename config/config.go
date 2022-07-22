@@ -3,7 +3,6 @@ package config
 import (
 	"github.com/spf13/viper"
 	"log"
-	"os"
 )
 
 type RedisConfig struct {
@@ -45,12 +44,7 @@ var vp *viper.Viper
 func LoadConfig(additionalPath []string, args ...string) Config {
 	vp = viper.New()
 	var config Config
-	log.Println(os.Getenv("CONFIG_NAME"))
-	log.Println(os.Getenv("CONFIG_TYPE"))
-	if len(os.Getenv("CONFIG_NAME")) > 0 && len(os.Getenv("CONFIG_TYPE")) > 0 {
-		vp.SetConfigName(os.Getenv("CONFIG_NAME"))
-		vp.SetConfigType(os.Getenv("CONFIG_TYPE"))
-	} else if len(args) > 0 {
+	if len(args) > 0 {
 		vp.SetConfigName(args[0])
 		vp.SetConfigType(args[1])
 	} else {
