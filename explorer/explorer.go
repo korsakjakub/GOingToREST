@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/go-redis/redis/v9"
@@ -17,7 +18,7 @@ var rdb *redis.Client
 var conf config.Config
 
 func main() {
-	conf = config.LoadConfig([]string{"../config"})
+	conf = config.LoadConfig([]string{"../config"}, os.Getenv("CONFIG_NAME"), os.Getenv("CONFIG_TYPE"))
 	err := connectRedis()
 	if err != nil {
 		panic("error connecting to Redis:" + err.Error())
