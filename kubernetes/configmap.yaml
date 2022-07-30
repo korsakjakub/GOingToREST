@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    redis:
+      address: "redis"
+      port: "6379"
+      password: ""
+      db: "0"
+
+    rabbitmq:
+      login: "guest"
+      password: "guest"
+      address: "rabbitmq"
+      port: "5672"
+      exchangename: "events"
+      exchangetype: "topic"
+      queuename: "test"
+
+    poster:
+      port: "6666"
+      function: "add"
+
+    explorer:
+      port: "80"
+      function: "size"
+kind: ConfigMap
+metadata:
+  name: goingtorest-config
+  namespace: goingtorest

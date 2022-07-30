@@ -1,0 +1,132 @@
+-------------------------------------------------------------------------------
+NGINX Ingress controller
+  Release:       v1.3.0
+  Build:         2b7b74854d90ad9b4b96a5011b9e8b67d20bfb8f
+  Repository:    https://github.com/kubernetes/ingress-nginx
+  nginx version: nginx/1.19.10
+
+-------------------------------------------------------------------------------
+
+W0730 16:43:11.281003       9 client_config.go:617] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+I0730 16:43:11.281124       9 main.go:230] "Creating API client" host="https://10.0.0.1:443"
+I0730 16:43:11.318483       9 main.go:274] "Running in Kubernetes cluster" major="1" minor="22" git="v1.22.11" state="clean" commit="6b66c9a34569cd5a6e330eda21d1d8bd792e164e" platform="linux/amd64"
+I0730 16:43:11.527503       9 main.go:104] "SSL fake certificate created" file="/etc/ingress-controller/ssl/default-fake-certificate.pem"
+I0730 16:43:11.546281       9 ssl.go:531] "loading tls certificate" path="/usr/local/certificates/cert" key="/usr/local/certificates/key"
+I0730 16:43:11.580838       9 nginx.go:258] "Starting NGINX Ingress controller"
+I0730 16:43:11.590771       9 event.go:285] Event(v1.ObjectReference{Kind:"ConfigMap", Namespace:"goingtorest", Name:"ingress-nginx-controller", UID:"0eb1967c-ec61-41de-ba18-7aa2781470dc", APIVersion:"v1", ResourceVersion:"99611", FieldPath:""}): type: 'Normal' reason: 'CREATE' ConfigMap goingtorest/ingress-nginx-controller
+I0730 16:43:12.781674       9 nginx.go:301] "Starting NGINX process"
+I0730 16:43:12.781894       9 leaderelection.go:248] attempting to acquire leader lease goingtorest/ingress-controller-leader...
+I0730 16:43:12.782366       9 nginx.go:321] "Starting validation webhook" address=":8443" certPath="/usr/local/certificates/cert" keyPath="/usr/local/certificates/key"
+I0730 16:43:12.782539       9 controller.go:167] "Configuration changes detected, backend reload required"
+E0730 16:43:12.823132       9 leaderelection.go:334] error initially creating leader election record: leases.coordination.k8s.io "ingress-controller-leader" already exists
+I0730 16:43:12.858107       9 controller.go:184] "Backend successfully reloaded"
+I0730 16:43:12.858181       9 controller.go:195] "Initial sync, sleeping for 1 second"
+I0730 16:43:12.858491       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+I0730 16:43:25.053131       9 status.go:84] "New leader elected" identity="ingress-nginx-controller-6875dd4f5f-t4t2r"
+W0730 16:48:31.913778       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:48:31.913814       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:48:31.946754       9 admission.go:149] processed ingress via admission controller {testedIngressLength:1 testedIngressTime:0.033s renderingIngressLength:1 renderingIngressTime:0s admissionTime:21.8kBs testedConfigurationSize:0.033}
+I0730 16:48:31.946787       9 main.go:100] "successfully validated configuration, accepting" ingress="goingtorest/ingress-nginx"
+I0730 16:48:31.958512       9 store.go:429] "Found valid IngressClass" ingress="goingtorest/ingress-nginx" ingressclass="nginx"
+W0730 16:48:31.958842       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:48:31.958864       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:48:31.958908       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:48:31.959906       9 event.go:285] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"goingtorest", Name:"ingress-nginx", UID:"32953a7b-c988-41e3-8016-9937436f5771", APIVersion:"networking.k8s.io/v1", ResourceVersion:"101097", FieldPath:""}): type: 'Normal' reason: 'Sync' Scheduled for sync
+I0730 16:48:32.017418       9 controller.go:184] "Backend successfully reloaded"
+I0730 16:48:32.018086       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 16:49:12.829564       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:12.830216       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:49:12.829812       9 event.go:285] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"goingtorest", Name:"ingress-nginx", UID:"32953a7b-c988-41e3-8016-9937436f5771", APIVersion:"networking.k8s.io/v1", ResourceVersion:"101274", FieldPath:""}): type: 'Normal' reason: 'Sync' Scheduled for sync
+W0730 16:49:52.482951       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:52.482994       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:49:55.996954       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:55.996981       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:51:02.681635       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:51:02.681906       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:51:06.016101       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:51:06.016132       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:52:26.124524       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:52:26.124797       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 16:52:26.125121       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:52:26.184383       9 controller.go:184] "Backend successfully reloaded"
+I0730 16:52:26.185361       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 16:52:40.308290       9 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:52:40.308321       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:52:40.308381       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:52:40.365308       9 controller.go:184] "Backend successfully reloaded"
+I0730 16:52:40.366113       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+10.224.0.4 - - [30/Jul/2022:16:53:46 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 8dd306647bc4caf04d632f5ff4a59e03
+10.224.0.4 - - [30/Jul/2022:16:53:46 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - e669ef30ecb02de6606dfb3abca768f4
+10.224.0.4 - - [30/Jul/2022:16:53:47 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 649136051dec995a1ac6a9b4bd112fa0
+10.224.0.4 - - [30/Jul/2022:16:53:47 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 79583c72f4da1dad1066e1708595ce06
+10.224.0.4 - - [30/Jul/2022:16:53:48 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - d7dac3a9f217ab604005864aa0e81555
+10.224.0.4 - - [30/Jul/2022:16:53:48 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 572d097b866880cab75a4a24ef3db002
+10.224.0.4 - - [30/Jul/2022:16:53:49 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 74cde8fa95caa640f70d73a446c55b0a
+10.224.0.4 - - [30/Jul/2022:16:53:51 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 0db66564f5bb01c98174527e513bb94f
+10.224.0.4 - - [30/Jul/2022:16:53:52 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 3446ec68e828f94aea542533b1a7a13f
+10.224.0.4 - - [30/Jul/2022:16:53:53 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - c3e9c81d4b006bcd8135f8628284a0bb
+10.224.0.4 - - [30/Jul/2022:16:53:59 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 04c8678551261c9dd95ad5553b2da652
+10.224.0.4 - - [30/Jul/2022:16:54:00 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 410024873f1cb86c94c7e0523af70815
+10.224.0.4 - - [30/Jul/2022:16:54:00 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - aff23166215cfb9752194eb9163ac5e1
+10.224.0.4 - - [30/Jul/2022:16:54:00 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - a7a7e32285fdf6bed5a2631d9ab590f3
+10.224.0.4 - - [30/Jul/2022:16:54:00 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - aadd4f644970f3d9b34955032994ac5d
+10.224.0.4 - - [30/Jul/2022:16:54:01 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 55f3e0013eae7ff3f41f39bcb4bb7cb5
+10.224.0.4 - - [30/Jul/2022:16:54:01 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - d2b7a8e288667f538e82b9ed4aaed7f4
+10.224.0.4 - - [30/Jul/2022:16:54:01 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 1804b697eadfa1d50c2fceddb44a64ea
+10.224.0.4 - - [30/Jul/2022:16:54:01 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 3e063ba178741e020cc768616785256f
+10.224.0.4 - - [30/Jul/2022:16:56:21 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 4112b4c7e21498b1a28da39bbf381691
+10.224.0.4 - - [30/Jul/2022:16:56:22 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 8bd77cab0f1f563c1709e278a99e0804
+W0730 17:08:02.231975       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:05.567202       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:19.254420       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:43.308216       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 17:08:43.308664       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:08:43.381077       9 controller.go:184] "Backend successfully reloaded"
+I0730 17:08:43.381673       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:08:46.640598       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+W0730 17:08:49.974574       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:08:49.974636       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 17:08:49.974718       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:08:50.029866       9 controller.go:184] "Backend successfully reloaded"
+I0730 17:08:50.031008       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:08:53.307255       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:08:53.307301       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+W0730 17:09:11.748480       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:11.748535       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 17:09:11.748596       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:09:11.817241       9 controller.go:184] "Backend successfully reloaded"
+I0730 17:09:11.817818       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:09:15.082003       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:18.415290       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:18.415345       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:21.749286       9 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:21.749350       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:25.081912       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 17:09:25.081999       9 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:09:25.146427       9 controller.go:184] "Backend successfully reloaded"
+I0730 17:09:25.147429       9 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-vq5f9", UID:"e9caa6d8-1e6c-47e6-96a4-3aa299d9f9e3", APIVersion:"v1", ResourceVersion:"99648", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:09:28.415309       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:31.748924       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:35.081932       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:10:01.490584       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:10:52.576201       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:11:38 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.004, 0.000 502, 502, 502 a6027b03417a4e45360cdbf7012f71c3
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:11:38 [error] 521#521: *15251 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:11:38 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.004 502, 502, 502 01e893997fead8bfaab7e1c3e8ece3d3
+W0730 17:12:20.737684       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:15:07.049388       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:20:12.605458       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:25:53.937016       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:31:34.499607       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:05.074243       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:14.863019       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:18.196518       9 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+10.224.0.4 - - [30/Jul/2022:17:42:53 +0000] "POST /add HTTP/1.1" 404 19 "-" "curl/7.84.0" 215 0.002 [goingtorest-poster-svc-6666] [] 10.244.3.18:6666 19 0.000 404 56515d0f5f018e7ca0247d239e089ed3
+10.224.0.4 - - [30/Jul/2022:17:49:37 +0000] "\x16\x03\x01\x00\xEE\x01\x00\x00\xEA\x03\x03\x99\x11\xD9l\xAB\xE4\xE9*\xA5\xD9`%\x1C0\xAE\x8A\x88\xD5\xCF\x879c\x93\xD1\x83\x80j\xD9F\x01\xE57 \x18\x81\x10\xB3\x96\xDC\xB6\x92\xB9\x8E\x83\xAA>\x97fN0\xDE-\x7F\xEC\xD5B\xD2\xF6\x7F\xE1s\xDA\xAC\xED\xA8\x00&\xC0/\xC00\xC0+\xC0,\xCC\xA8\xCC\xA9\xC0\x13\xC0\x09\xC0\x14\xC0" 400 150 "-" "-" 0 0.038 [] [] - - - - 0adb1ce567f3e4186d8607c849ad3187
+10.224.0.5 - - [30/Jul/2022:17:49:38 +0000] "CONNECT leakix.net:443 HTTP/1.1" 400 150 "-" "-" 0 0.040 [] [] - - - - ced5110de396637b1cc84758d7f555bd
+10.224.0.5 - - [30/Jul/2022:17:49:38 +0000] "GET /cgi-bin/.%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/hosts HTTP/1.1" 400 150 "-" "-" 94 0.033 [] [] - - - - c7b04b3f6c1c1bfb6ffe57054cd116a5

@@ -1,0 +1,180 @@
+-------------------------------------------------------------------------------
+NGINX Ingress controller
+  Release:       v1.3.0
+  Build:         2b7b74854d90ad9b4b96a5011b9e8b67d20bfb8f
+  Repository:    https://github.com/kubernetes/ingress-nginx
+  nginx version: nginx/1.19.10
+
+-------------------------------------------------------------------------------
+
+W0730 16:43:11.292227      10 client_config.go:617] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+I0730 16:43:11.292344      10 main.go:230] "Creating API client" host="https://10.0.0.1:443"
+I0730 16:43:11.319464      10 main.go:274] "Running in Kubernetes cluster" major="1" minor="22" git="v1.22.11" state="clean" commit="6b66c9a34569cd5a6e330eda21d1d8bd792e164e" platform="linux/amd64"
+I0730 16:43:11.523336      10 main.go:104] "SSL fake certificate created" file="/etc/ingress-controller/ssl/default-fake-certificate.pem"
+I0730 16:43:11.542785      10 ssl.go:531] "loading tls certificate" path="/usr/local/certificates/cert" key="/usr/local/certificates/key"
+I0730 16:43:11.578256      10 nginx.go:258] "Starting NGINX Ingress controller"
+I0730 16:43:11.595209      10 event.go:285] Event(v1.ObjectReference{Kind:"ConfigMap", Namespace:"goingtorest", Name:"ingress-nginx-controller", UID:"0eb1967c-ec61-41de-ba18-7aa2781470dc", APIVersion:"v1", ResourceVersion:"99611", FieldPath:""}): type: 'Normal' reason: 'CREATE' ConfigMap goingtorest/ingress-nginx-controller
+I0730 16:43:12.781155      10 nginx.go:301] "Starting NGINX process"
+I0730 16:43:12.781434      10 leaderelection.go:248] attempting to acquire leader lease goingtorest/ingress-controller-leader...
+I0730 16:43:12.782073      10 nginx.go:321] "Starting validation webhook" address=":8443" certPath="/usr/local/certificates/cert" keyPath="/usr/local/certificates/key"
+I0730 16:43:12.782485      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:43:12.798377      10 leaderelection.go:258] successfully acquired lease goingtorest/ingress-controller-leader
+I0730 16:43:12.798565      10 status.go:84] "New leader elected" identity="ingress-nginx-controller-6875dd4f5f-t4t2r"
+I0730 16:43:12.839873      10 controller.go:184] "Backend successfully reloaded"
+I0730 16:43:12.840179      10 controller.go:195] "Initial sync, sleeping for 1 second"
+I0730 16:43:12.840622      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+I0730 16:48:31.958318      10 store.go:429] "Found valid IngressClass" ingress="goingtorest/ingress-nginx" ingressclass="nginx"
+W0730 16:48:31.958696      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:48:31.958720      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:48:31.958768      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:48:31.961612      10 event.go:285] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"goingtorest", Name:"ingress-nginx", UID:"32953a7b-c988-41e3-8016-9937436f5771", APIVersion:"networking.k8s.io/v1", ResourceVersion:"101097", FieldPath:""}): type: 'Normal' reason: 'Sync' Scheduled for sync
+I0730 16:48:32.015367      10 controller.go:184] "Backend successfully reloaded"
+I0730 16:48:32.016213      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+I0730 16:49:12.818142      10 status.go:299] "updating Ingress status" namespace="goingtorest" ingress="ingress-nginx" currentValue=[] newValue=[{IP:20.105.72.86 Hostname: Ports:[]}]
+W0730 16:49:12.829982      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:12.830115      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:49:12.830030      10 event.go:285] Event(v1.ObjectReference{Kind:"Ingress", Namespace:"goingtorest", Name:"ingress-nginx", UID:"32953a7b-c988-41e3-8016-9937436f5771", APIVersion:"networking.k8s.io/v1", ResourceVersion:"101274", FieldPath:""}): type: 'Normal' reason: 'Sync' Scheduled for sync
+W0730 16:49:52.482209      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:52.482258      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:49:55.996663      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:49:55.996692      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+10.224.0.4 - - [30/Jul/2022:16:50:54 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 428 0.000 [goingtorest-explorer-svc-80] [] - - - - 3efa89d812de72cd3f6885836c09d669
+10.224.0.4 - - [30/Jul/2022:16:50:55 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 36fd42053894900e8c9d7b54afad8439
+W0730 16:51:02.681273      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:51:02.681305      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 16:51:06.015322      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:51:06.015453      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+10.224.0.4 - - [30/Jul/2022:16:51:08 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 0422ab0abfabcf9e6f8257170a020a7c
+10.224.0.4 - - [30/Jul/2022:16:51:09 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 2b2b4807f7faa1f4e75d4a8a8100d215
+10.224.0.4 - - [30/Jul/2022:16:51:10 +0000] "GET /size HTTP/1.1" 503 592 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.000 [goingtorest-explorer-svc-80] [] - - - - 11db13af35db7eb3b1feeb3a596e0913
+W0730 16:52:26.124243      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:52:26.124280      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 16:52:26.124345      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:52:26.199352      10 controller.go:184] "Backend successfully reloaded"
+I0730 16:52:26.199652      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 16:52:40.308034      10 controller.go:1111] Service "goingtorest/explorer-svc" does not have any active Endpoint.
+W0730 16:52:40.308066      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 16:52:40.308191      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 16:52:40.370311      10 controller.go:184] "Backend successfully reloaded"
+I0730 16:52:40.370756      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:08:02.231131      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:05.565378      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:19.254031      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:08:43.307794      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 17:08:43.307893      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:08:43.359343      10 controller.go:184] "Backend successfully reloaded"
+I0730 17:08:43.360411      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:08:46.640097      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+W0730 17:08:49.974363      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:08:49.974406      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+I0730 17:08:49.974470      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:08:50.030353      10 controller.go:184] "Backend successfully reloaded"
+I0730 17:08:50.030946      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:08:53.306934      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:08:53.307019      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/poster-svc": no object matching key "goingtorest/poster-svc" in local store
+W0730 17:09:11.747326      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:11.747370      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 17:09:11.747642      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:09:11.802412      10 controller.go:184] "Backend successfully reloaded"
+I0730 17:09:11.802980      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:09:15.080887      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:18.415041      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:18.415120      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:21.748062      10 controller.go:1016] Error obtaining Endpoints for Service "goingtorest/explorer-svc": no object matching key "goingtorest/explorer-svc" in local store
+W0730 17:09:21.748122      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:25.081621      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+I0730 17:09:25.081711      10 controller.go:167] "Configuration changes detected, backend reload required"
+I0730 17:09:25.135778      10 controller.go:184] "Backend successfully reloaded"
+I0730 17:09:25.136574      10 event.go:285] Event(v1.ObjectReference{Kind:"Pod", Namespace:"goingtorest", Name:"ingress-nginx-controller-6875dd4f5f-t4t2r", UID:"a2d6e92f-e6cc-4fa8-83cc-e5bc0ce6fed1", APIVersion:"v1", ResourceVersion:"99651", FieldPath:""}): type: 'Normal' reason: 'RELOAD' NGINX reload triggered due to a change in configuration
+W0730 17:09:28.414401      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:31.747461      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:09:35.080977      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:10:01.489871      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:10:52.575468      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:12:20.738013      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:15:07.048717      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:20:12.605104      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:25:53 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 db2f691168c3bdf13e9d9ec6d2f9b468
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+W0730 17:25:53.936987      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:25:53 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:25:53 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 07c2917d2e27ccf196778cc426e632b3
+2022/07/30 17:26:13 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:26:13 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:26:13 [error] 520#520: *22902 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:26:13 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 428 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.004, 0.000, 0.004 502, 502, 502 b181b4e8ee2ae39c59ecfb6022fcf765
+W0730 17:31:34.500195      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:05.073896      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:14.862894      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+W0730 17:33:18.196387      10 controller.go:1111] Service "goingtorest/poster-svc" does not have any active Endpoint.
+2022/07/30 17:34:43 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:34:43 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:34:43 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:34:43 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.004, 0.000 502, 502, 502 ec205b390b7d39d557372ea939c70595
+2022/07/30 17:34:44 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:34:44 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:34:44 [error] 520#520: *27644 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:34:44 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.004, 0.000, 0.000 502, 502, 502 e46132ba3228b1ebfcc0658ad191178c
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:37:00 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.005 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.004, 0.000, 0.000 502, 502, 502 42ad8bfbb6df04bff99473cf4eaa990a
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:37:00 [error] 521#521: *28870 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:37:00 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.004 502, 502, 502 2bcb5726ba0be23d86ddbf0e1ab67589
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:39:37 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.006 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.004, 0.000, 0.000 502, 502, 502 85bfcfcc1ccc0828c3f43f3cf504dd76
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:39:37 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:39:37 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.007 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.004, 0.004, 0.000 502, 502, 502 014f993a2b965f3c491baeb0afce274e
+2022/07/30 17:40:16 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:40:16 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:40:16 [error] 521#521: *30277 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.4, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.4 - - [30/Jul/2022:17:40:16 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 8f2e4b837201a87096e38ef5501bf996
+2022/07/30 17:42:09 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:09 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:09 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:09 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 30673a37b4c2dc0a09eef6d5f88ff1b2
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:10 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 6421b78f6c121be0c39993359c175560
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:10 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 f324e5489dd9e2c849723e644f9d30f0
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:10 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:10 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.005 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.004 502, 502, 502 2faae29779847377d27836aef7865373
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:11 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 07de5ce303ffdf3c5bb9a1c680592b1f
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:11 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:11 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 7b92c6181aa8b0b7c712d21f3228eb03
+2022/07/30 17:42:12 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:12 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:42:12 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:42:12 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 471 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 c9f576e8befd1aa42a8d1ef085cbdcfb
+10.224.0.4 - - [30/Jul/2022:17:42:55 +0000] "POST /add HTTP/1.1" 404 19 "-" "curl/7.84.0" 215 0.004 [goingtorest-poster-svc-6666] [] 10.244.3.18:6666 19 0.000 404 367d346d0ba2ceeff9449485275dbcf7
+2022/07/30 17:43:07 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:43:07 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:43:07 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:43:07 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.003 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 e87ceb264dabc43b05a84389a6670e8c
+10.224.0.6 - - [30/Jul/2022:17:43:12 +0000] "GET /add HTTP/1.1" 404 19 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 427 0.002 [goingtorest-poster-svc-6666] [] 10.244.3.18:6666 19 0.000 404 e4e1375623b48db14b9cb84a1b6f0335
+2022/07/30 17:43:18 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:43:18 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+2022/07/30 17:43:18 [error] 520#520: *31632 connect() failed (111: Connection refused) while connecting to upstream, client: 10.224.0.6, server: _, request: "GET /size HTTP/1.1", upstream: "http://10.244.3.19:80/", host: "20.105.72.86"
+10.224.0.6 - - [30/Jul/2022:17:43:18 +0000] "GET /size HTTP/1.1" 502 552 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36" 454 0.004 [goingtorest-explorer-svc-80] [] 10.244.3.19:80, 10.244.3.19:80, 10.244.3.19:80 0, 0, 0 0.000, 0.000, 0.000 502, 502, 502 53e5fef50f473d645e80db1b50bce211
+10.224.0.6 - - [30/Jul/2022:17:49:38 +0000] "GET / HTTP/1.1" 400 150 "-" "-" 24 0.041 [] [] - - - - 273ffdf90d93ea281e6a790a50a1445c

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: explorer
+  namespace: goingtorest
+spec:
+  selector:
+    matchLabels:
+      app: explorer
+  template:
+    metadata:
+      labels:
+        app: explorer
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - image: korsakjakub/goingtorest-explorer:v1
+          name: explorer
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 80
+              name: explorer
+      volumes:
+        - name: config
+          configMap:
+            name: goingtorest-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: explorer-svc
+  namespace: goingtorest
+spec:
+  selector:
+    app: explorer
+  ports:
+  - port: 80
+  type: ClusterIP
