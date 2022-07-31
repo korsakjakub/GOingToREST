@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: explorer
+  namespace: goingtorest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: explorer
+  template:
+    metadata:
+      labels:
+        app:
+          explorer
+    spec:
+      containers:
+        - image: korsakjakub/goingtorest-explorer:v1
+          name: explorer
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: goingtorest-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: explorer-svc
+  namespace: goingtorest
+spec:
+  selector:
+    app: explorer
+  ports:
+  - name: explorer
+    protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poster
+  namespace: goingtorest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: poster
+  template:
+    metadata:
+      labels:
+        app:
+          poster
+    spec:
+      containers:
+        - image: korsakjakub/goingtorest-poster:v1
+          name: poster
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: goingtorest-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: poster-svc
+  namespace: goingtorest
+spec:
+  selector:
+    app: poster
+  ports:
+  - name: poster
+    protocol: TCP
+    port: 6666
+    targetPort: 6666
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saver
+  namespace: goingtorest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: saver
+  template:
+    metadata:
+      labels:
+        app:
+          saver
+    spec:
+      containers:
+        - image: korsakjakub/goingtorest-saver:v1
+          name: saver
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: goingtorest-config

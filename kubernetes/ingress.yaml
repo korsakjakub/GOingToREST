@@ -1,28 +1,36 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-nginx
   namespace: goingtorest
   annotations:
-    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
+  ingressClassName: nginx
   rules:
   - http:
       paths:
-      - backend:
-          service:
-            name: explorer-svc
-            port:
-              number: 80
-        path: /size(/|$)(.*)
+      - path: /add(/|$)(.*)
         pathType: Prefix
-      - backend:
+        backend:
           service:
             name: poster-svc
             port:
               number: 6666
-        path: /add(/|$)(.*)
+      - path: /size(/|$)(.*)
         pathType: Prefix
+        backend:
+          service:
+            name: explorer-svc
+            port:
+              number: 80
+#     - path: /(.*)
+#       pathType: Prefix
+#       backend:
+#         service:
+#           name: aks-helloworld-one
+#           port:
+#             number: 80

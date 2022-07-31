@@ -2,7 +2,7 @@ apiVersion: v1
 data:
   config.yaml: |-
     redis:
-      address: "redis"
+      address: "redis-svc"
       port: "6379"
       password: ""
       db: "0"
@@ -18,11 +18,11 @@ data:
 
     poster:
       port: "6666"
-      function: "add"
+      function: ""
 
     explorer:
       port: "80"
-      function: "size"
+      function: ""
 kind: ConfigMap
 metadata:
   name: goingtorest-config
