@@ -2,6 +2,7 @@
 
 GOingToREST is a simple 3-app systfwfwem built for me to learn about communicating between different services.
 fewfewfwfw
+fewfwfwfwffwegfewfwfwfuwihbfuwi
 
 * [`poster/poster.go`](poster/poster.go) 
   * Listens to POST requests
