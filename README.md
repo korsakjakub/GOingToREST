@@ -1,6 +1,7 @@
 # GOingToREST
 
-GOingToREST is a simple 3-app system built for me to learn about communicating between different services.
+GOingToREST is a simple 3-app systfwfwem built for me to learn about communicating between different services.
+fewfewfwfw
 
 * [`poster/poster.go`](poster/poster.go) 
   * Listens to POST requests
