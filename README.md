@@ -14,7 +14,7 @@ GOingToREST is a simple 3-app system built for me to learn about communicating b
 * [`user/user.go`](user/user.go)
   * Struct User with some sample fields like id, name, surname, and age.
   
-For debugging/testing purposes, in [`scripts/`](scripts/) there is [`post_curl.sh`](scripts/post_curl.sh) which send random POSTs of correct form
+For debugging/testing purposes, in [`scripts/`](scripts/) there is [`post_curl.sh`](scripts/post_curl.sh) which sends random POSTs of correct form
 (remark: [jq](https://stedolan.github.io/jq/) required)
 
 ## Requirements
